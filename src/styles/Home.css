@@ -1,0 +1,378 @@
+/* src/styles/Home.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Hero Section */
+.hero {
+  padding: 5rem 0 4rem 0;
+  text-align: center;
+  background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #0f172a, #2563eb);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #334155;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.btn-primary {
+  background: #0f172a;
+  color: white;
+  border: none;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-primary:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Tools Section */
+.tools-section {
+  padding: 4rem 0 3rem 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: #0f172a;
+}
+
+/* Tools Grid - 4 columns */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+/* Tool Card */
+.tool-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s ease;
+  border: 1px solid rgba(203, 213, 225, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tool-icon {
+  font-size: 1.8rem;
+}
+
+.tool-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.tool-description {
+  color: #475569;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  border-left: 2px solid #e2e8f0;
+  padding-left: 0.6rem;
+}
+
+.tool-input-group {
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #2563eb;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.tool-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  background: #fefefe;
+  transition: all 0.2s ease;
+}
+
+.tool-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea.tool-input {
+  resize: vertical;
+  min-height: 65px;
+}
+
+.run-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin: 0.5rem 0 1rem 0;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #1e293b;
+}
+
+.run-btn:hover {
+  background: #e6edf5;
+  border-color: #cbd5e1;
+  transform: scale(0.98);
+}
+
+.run-btn:active {
+  transform: scale(0.96);
+}
+
+.output-preview {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 0.9rem;
+  border: 1px solid #eef2ff;
+  font-size: 0.85rem;
+  color: #1e293b;
+  min-height: 100px;
+  transition: all 0.1s;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.output-preview div {
+  margin-bottom: 0.25rem;
+}
+
+.output-preview div:last-child {
+  margin-bottom: 0;
+}
+
+/* Workflow Visualization */
+.workflow-row {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: #ffffff;
+  padding: 1.5rem 2rem;
+  border-radius: 3rem;
+  border: 1px solid #eef2ff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.workflow-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f1f5f9;
+  padding: 0.6rem 1.3rem;
+  border-radius: 60px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.step-icon {
+  font-size: 1.2rem;
+}
+
+.arrow-symbol {
+  font-size: 1.5rem;
+  color: #94a3b8;
+  font-weight: 300;
+}
+
+.workflow-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #5b6e8c;
+  margin-top: 1rem;
+}
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+  padding: 1.8rem 0;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+  text-align: center;
+}
+
+.footer p {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .hero {
+    padding: 3rem 0 2.5rem 0;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+  }
+  
+  .workflow-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 2rem;
+    padding: 1.2rem;
+  }
+  
+  .arrow-symbol {
+    transform: rotate(90deg);
+    display: inline-block;
+  }
+  
+  .workflow-step {
+    width: 80%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .btn-primary {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .tool-card {
+    padding: 1.2rem;
+  }
+  
+  .tool-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Loading animation for output */
+.output-preview:has(div:contains("⏳")) {
+  background: linear-gradient(90deg, #f8fafc, #f1f5f9, #f8fafc);
+  background-size: 200% 100%;
+  animation: shimmer 1s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}

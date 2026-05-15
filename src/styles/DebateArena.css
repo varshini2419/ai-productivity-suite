@@ -1,0 +1,824 @@
+/* src/styles/DebateArena.css */
+
+:root {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+
+  /* CHANGE TEXT COLORS */
+  --text-primary: #000000;   /* Pure black */
+  --text-secondary: #000000; /* Black for visibility */
+  --text-muted: #000000;     /* Black instead of grey */
+
+  --accent-primary: #2563EB;
+  --accent-secondary: #7C3AED;
+  --accent-tertiary: #06B6D4;
+
+  --card-bg: #FFFFFF;
+  --border-color: rgba(30, 41, 59, 0.2);
+  --shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
+
+  --gradient-primary: linear-gradient(135deg, #2563EB, #7C3AED);
+  --gradient-accent: linear-gradient(135deg, #7C3AED, #06B6D4);
+  --gradient-soft: linear-gradient(135deg, #F8FAFC, #FFFFFF);
+
+  /* ADD MESSAGE COLORS (for chat visibility) */
+  --user-msg: #E8F0FE;
+  --ai-msg: #F1F5F9;
+  --system-msg: #F8FAFC;
+
+  /* Debate colors */
+  --for-color: #10B981;
+  --against-color: #EF4444;
+}
+/* ===== NEURAL NETWORK BACKGROUND ===== */
+.neural-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  z-index: -2;
+  overflow: hidden;
+}
+
+.neural-grid {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: 
+    linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: rotate(15deg);
+  animation: gridFloat 20s linear infinite;
+}
+
+.neural-nodes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 30% 40%, rgba(37, 99, 235, 0.05) 0%, transparent 30%),
+                    radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.05) 0%, transparent 35%),
+                    radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.03) 0%, transparent 40%);
+  filter: blur(40px);
+  animation: nodesPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridFloat {
+  0% { transform: rotate(15deg) translateY(0); }
+  100% { transform: rotate(15deg) translateY(50px); }
+}
+
+@keyframes nodesPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== GLASSMORPHISM CARD STYLES ===== */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+  transform: translateY(-2px);
+}
+
+.card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover .card-glow {
+  opacity: 1;
+}
+
+/* ===== FUTURISTIC INPUT STYLES ===== */
+.futuristic-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.futuristic-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: var(--card-bg);
+}
+
+.futuristic-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ===== DEBATE ARENA CONTAINER ===== */
+.debate-arena-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+/* Header with Logo */
+.debate-header {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 1;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.debate-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3));
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3)); }
+  50% { filter: drop-shadow(0 0 30px rgba(124, 58, 237, 0.5)); }
+}
+
+.debate-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.debate-tagline {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Title Section */
+.debate-title-section {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 1;
+}
+
+.debate-main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  text-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+}
+
+.debate-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Setup Card */
+.debate-setup-card {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  margin: 0 auto;
+  z-index: 2;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.debate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.label-icon {
+  font-size: 1.3rem;
+  color: var(--accent-primary);
+}
+
+/* Position Selector Buttons */
+.position-selector {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.position-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.position-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.2);
+}
+
+.position-btn.active {
+  border-width: 2px;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.position-btn.active.for {
+  border-color: var(--for-color);
+  background: rgba(16, 185, 129, 0.05);
+  color: var(--for-color);
+}
+
+.position-btn.active.against {
+  border-color: var(--against-color);
+  background: rgba(239, 68, 68, 0.05);
+  color: var(--against-color);
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
+.btn-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.position-btn:hover .btn-glow {
+  opacity: 1;
+}
+
+/* Start Debate Button */
+.start-debate-btn {
+  position: relative;
+  padding: 18px 32px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.start-debate-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.4);
+}
+
+.start-debate-btn .btn-glow {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+}
+
+/* Error Message */
+.error-message {
+  color: #ef4444;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Tech Stack Badge */
+.tech-stack-badge {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.tech-item {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 5px 15px;
+  background: rgba(37, 99, 235, 0.05);
+  border-radius: 50px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+/* ===== DEBATE CHAT ARENA ===== */
+.debate-chat-arena {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.debate-chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+/* Chat Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  z-index: 10;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.header-info h2 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.debate-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+}
+
+.position-indicator {
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(37, 99, 235, 0.05);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: var(--text-secondary);
+}
+
+.position-indicator.user-for {
+  border-color: var(--for-color);
+  color: var(--for-color);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.position-indicator.user-against {
+  border-color: var(--against-color);
+  color: var(--against-color);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.position-indicator.ai-for {
+  border-color: var(--for-color);
+  color: var(--for-color);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.position-indicator.ai-against {
+  border-color: var(--against-color);
+  color: var(--against-color);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.round-indicator {
+  padding: 4px 12px;
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 50px;
+  color: var(--accent-secondary);
+}
+
+.new-debate-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(37, 99, 235, 0.05);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.new-debate-btn:hover {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--accent-primary);
+  transform: translateX(-2px);
+}
+
+/* Main Chat Area with Side Panel */
+.chat-main-area {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Stats Panel */
+.stats-panel {
+  width: 280px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.stats-title {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: rgba(37, 99, 235, 0.05);
+  transform: translateX(5px);
+}
+
+.stat-icon {
+  font-size: 1.2rem;
+  width: 30px;
+  color: var(--accent-primary);
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.stat-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.stat-item.highlight .stat-value.for {
+  color: var(--for-color);
+}
+
+.stat-item.highlight .stat-value.against {
+  color: var(--against-color);
+}
+
+/* Chat Messages Area */
+.chat-messages-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Message Bubbles */
+.message {
+  display: flex;
+  gap: 15px;
+  animation: messageAppear 0.3s ease-out;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.message-content-wrapper {
+  flex: 1;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.message-sender {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.message-timestamp {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.message-content {
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 15px 20px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* User Message */
+.user-message .message-content {
+  background: var(--user-msg);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* AI Message */
+.ai-message .message-content {
+  background: var(--ai-msg);
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* System Message */
+.system-message .message-content {
+  background: var(--system-msg);
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 100%;
+  text-align: center;
+  border-radius: 50px;
+}
+
+/* AI Thinking */
+.ai-thinking .message-content {
+  background: transparent;
+  padding: 10px 0;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 5px;
+  padding: 10px 0;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-10px); opacity: 1; }
+}
+
+/* Chat Input Area */
+.chat-input-area {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  z-index: 10;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.chat-input {
+  flex: 1;
+  resize: none;
+  min-height: 60px;
+  max-height: 120px;
+  padding: 15px 20px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.send-message-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 30px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.send-message-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
+}
+
+.send-message-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-message-btn .btn-glow {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+}
+
+/* Chat Error */
+.chat-error {
+  margin: 10px 20px;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  color: #ef4444;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .debate-main-title {
+    font-size: 2.5rem;
+  }
+  
+  .chat-main-area {
+    flex-direction: column;
+  }
+  
+  .stats-panel {
+    width: 100%;
+  }
+  
+  .position-selector {
+    flex-direction: column;
+  }
+  
+  .debate-setup-card {
+    padding: 30px 20px;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
